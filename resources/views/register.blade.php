@@ -148,6 +148,13 @@
                                     </div>
                                 </div>    
                                 <!-- ------------D.O.B end--------------- -->
+                                <!-- next -->
+                                <ul class="pager wizard">
+                                <!-- <li class="previous"><a class="btnPrevious">Previous</a></li> -->
+                                <li class="next"><a class="btnNext">Next</a></li>
+                            </ul>
+
+                                <!-- end basic next -->
                             </div> 
                             <!-- tab Basic end-->
                             
@@ -225,6 +232,13 @@
                                     </div>
                                 </div>
                                 <!-- dept END -->
+                                <!-- next -->
+                                 <ul class="pager wizard">
+                                <li class="previous"><a class="btnPrevious">Previous</a></li>
+                                <li class="next"><a class="btnNext">Next</a></li>
+                            </ul>       
+
+                                <!-- end  college next -->
                             </div>
                             <!-- new tab college end -->                        
 
@@ -331,6 +345,13 @@
                                         <!-- dept END -->
                                     </div>
                                 </div>
+                                <!-- next -->
+                                 <ul class="pager wizard">
+                                <li class="previous"><a class="btnPrevious">Previous</a></li>
+                                <li class="next"><a class="btnNext">Next</a></li>
+                            </ul> 
+
+                                <!-- end next -->
 
                             </div>
                             <!-- tab Staying END---->
@@ -340,19 +361,38 @@
                                <!-- upload -->
                                <div action="demo_form.asp">
                                   <input type="file" name="pic" accept="image/*">
-                                  <input type="submit">
+                                  <!-- next -->
+                                  <ul class="pager wizard">
+                                <li class="previous"><a class="btnPrevious"style="position:relative; top:20px;">Previous</a></li></br>
+                                <!-- <li class="next"><a class="btnNext">Next</a></li> -->
+                                <li class="next pull-right"><input class="btn btn-primary btnsubmit" type="submit"></li>
+                            </ul>
+                            <!-- end next -->
+
                                 </div>
                             </div>
                             <!-- tab pic END---->
 
                             <!-- next  -->
-                            <ul class="pager wizard">
-                                <li class="previous first" style="display:none;"><a href="#">First</a></li>
-                                <li class="previous"><a href="#">Previous</a></li>
-                                <li class="next last" style="display:none;"><a href="#">Last</a></li>
-                                <li class="next"><a href="#">Next</a></li>
-                            </ul>
-                            <!-- next end -->
+                        
+
+                            <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    
+                           <script type='text/javascript'>
+
+                            $(document).ready(function() {
+                                $('.btnNext').click(function(){
+                                $('.nav-pills > .active').next('li').find('a').trigger('click');
+                                });
+
+                                $('.btnPrevious').click(function(){
+                                $('.nav-pills > .active').prev('li').find('a').trigger('click');
+                                });
+                             });
+
+                           </script>
+                           <!-- next end -->
+
                         </div>                           
                     </form>
                 </div>
