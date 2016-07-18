@@ -11,7 +11,7 @@
       </div>
       <div class="pull-left info">
         <p>Mohan Kumar</p>
-        <!-- Status -->
+        <!-- Status-->
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>

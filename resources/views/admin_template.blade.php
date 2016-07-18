@@ -24,9 +24,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   -->
   <link rel="stylesheet" href="{{asset('/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css')}}" >
 
+  <script type="text/javascript" src="{{asset('/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
+  <!--[if lt IE 9]>    //code.jquery.com/jquery-compat-git.js
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
@@ -80,7 +82,7 @@ desired effect
     <section class="content">
 
       <!-- Your Page Content Here -->
-      @yield('content')
+      @yield('content') 
 
     </section>
     <!-- /.content -->
