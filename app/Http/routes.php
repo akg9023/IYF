@@ -15,14 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin',function() {
-	return view('admin_template');
-});
+// Route::get('/register',function(){
+// 	return view('register');
+// });
 
 Route::auth();
 
+Route::get('/dashboard', function(){
+	return view('dashboard');
+});
+
 Route::get('/home', 'HomeController@index');
 
-Route::get('/register',function(){
-	return view('register');
-});
+Route::get('user/{id}/profile_pic', 'ImageController@showProfilePic');
+
+Route::get('user/edit_profile','HomeController@edit');
+
+Route::controller('/admin/edit_database', 'DatatablesController', [
+    'anyData'  => 'admin/edit_database.data',
+    'getIndex' => 'admin/edit_database',
+]);

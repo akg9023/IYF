@@ -1,4 +1,11 @@
-@extends('admin_template')
+@extends('layouts.admin_template')
+
+@section('initialize')
+<?php
+    $page_title="Login";
+    $page_desc="Sign in to your dashboard";
+?>
+@stop
 
 @section('content')
 <div class="container">

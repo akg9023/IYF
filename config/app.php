@@ -150,7 +150,21 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        /*
+        * Collective Service Provider...
+        */
         Collective\Html\HtmlServiceProvider::class,
+        Collective\Bus\BusServiceProvider::class,
+
+        /*
+        *Excel Service Provider...
+        */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        /*
+        *Intervention Image Service Provider
+        */
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -159,6 +173,11 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+        *Yajra Datatables Service Providers...
+        */
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
 
@@ -207,6 +226,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class
 
     ],
 
