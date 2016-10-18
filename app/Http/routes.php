@@ -21,11 +21,11 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/dashboard', function(){
-	return view('dashboard');
-});
-
 Route::get('/home', 'HomeController@index');
+
+Route::get('/user/connect', function(){
+	return view('connect');
+});
 
 Route::get('user/{id}/profile_pic', 'ImageController@showProfilePic');
 

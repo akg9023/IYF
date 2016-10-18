@@ -8,11 +8,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
-  $page_title="IYFKOL";
-  $page_desc="for youths by youths";
+  // $page_title="";
+  // $page_desc="";
   ?>
   @yield('initialize')
-  <title>{{("IYF | ").$page_title }}</title>
+  <title>{{("IYF | ").$page_title}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -86,7 +86,7 @@ desired effect
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section id="cont" class="content">
 
       <!-- Your Page Content Here -->
       @yield('content')
@@ -111,8 +111,8 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <!-- jQuery 2.2.3 -->
-<script src="{{asset('/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-
+<!-- Not Required -->
+<!-- <script src="{{asset('/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> -->
 <script type="text/javascript" src="//code.jquery.com/jquery.js"></script>
 
 <!-- Bootstrap 3.3.6 -->

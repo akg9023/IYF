@@ -56,7 +56,7 @@
     <ul class="sidebar-menu">
       <li class="header">Main Navigation</li>
       <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="{{asset('/dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+      <li class="active"><a href="{{asset('/home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
       <li class="treeview">
         <a href="#"><i class="fa fa-newspaper-o"></i> <span>Updating Profiles</span>
           <span class="pull-right-container">
@@ -66,6 +66,18 @@
         <ul class="treeview-menu">
           <li><a href="{{asset('/user/edit_profile')}}">My Profile</a></li>
           <li><a href="{{asset('/admin/edit_database')}}">User Profile</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview">
+        <a href="#"><i class="fa fa-newspaper-o"></i> <span>Connect</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{asset('/user/connect')}}">My Family</a></li>
+          <li><a href="{{asset('/user/connect')}}">Spiritual Family</a></li>
         </ul>
       </li>
       

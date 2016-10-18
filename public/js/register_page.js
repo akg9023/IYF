@@ -12,6 +12,13 @@ $(function() {
     $('.nav-pills > .active').prev('li').find('a').trigger('click');
     });
 
+//for CONNECTING DEVOTEES
+    $('input[name=gen]').on('change', function () {
+        if (!this.checked) return
+            $('.collapse').not($('li.' + $(this).attr('class'))).slideUp();
+        $('.collapse.' + $(this).attr('class')).slideDown();
+    });
+
 // Swiching between radios(mess,hostel,voice) in Staying tab for current users
     $('input[name=residence]').on('change', function () {
         if (!this.checked) return
