@@ -86,7 +86,7 @@ desired effect
     </section>
 
     <!-- Main content -->
-    <section id="cont" class="content">
+    <section id="content" class="content">
 
       <!-- Your Page Content Here -->
       @yield('content')
@@ -136,7 +136,18 @@ desired effect
      fixed layout. -->
 
 <script type="text/javascript">
+//Contact form from Zotabox
 (function(d,s,id){var z=d.createElement(s);z.type="text/javascript";z.id=id;z.async=true;z.src="//static.zotabox.com/c/c/cc7a1f16a0c3aab78ebc32f1bb2b992b/widgets.js";var sz=d.getElementsByTagName(s)[0];sz.parentNode.insertBefore(z,sz)}(document,"script","zb-embed-code"));
+
+// Handling Ajax request for loading cotents on particular menu clicked
+function load_content(url,domObj){
+
+  $('#content').load(url);
+  // var $m = $(domObj);
+  // $m.getElementby
+  alert($(domObj.getElementsByTagName('span')).firstChild);
+}
+
 </script>
 
 </body>

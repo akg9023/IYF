@@ -11,9 +11,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'surname', 'firstname', 'lastname', 'bdate', 'mob1', 'mob2', 'whatsapp', 'email', 'fb_email', 'college_name', 'period_from','period_to', 'connected_center', 'connected_devotee', 'per_addr', 'per_pin_id', 'image', 'password',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -24,8 +22,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function pincode($type)
-    {
-        return $this->belongsTo(Pincode::class , $type.'_pin_id');
+    public static function get_counsellors(){
+
+        return User::where('type1','counsellor')
+                    ->orderBy('initiated_name','asc')
+                    ->select('id','initiated_name as name')->get();
     }
+
+    
 }

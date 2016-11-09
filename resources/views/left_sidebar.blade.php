@@ -35,7 +35,7 @@
     <ul class="sidebar-menu">
       <li class="header">Main Navigation</li>
       <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="{{asset('/')}}"><i class="glyphicon glyphicon-fire"></i> <span>About Us</span></a></li>
+      <li class="active"><a class="aboutus" href="javascript:void(0)" onclick="load_content('{{asset('/')}}',this.parent)"><i class="glyphicon glyphicon-fire"></i> <span>About Us</span></a></li>
       <li><a href="#"><i class="fa fa-institution"></i> <span>Our Centers</span></a></li>
       <li><a href="#"><i class="fa fa-calendar-check-o"></i> <span>Events</span></a></li>
       <li><a href="#"><i class="fa fa-picture-o"></i> <span>Gallery</span></a></li>

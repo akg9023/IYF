@@ -59,13 +59,16 @@ class AuthController extends Controller
             'surname' => 'required_without:lastname|max:255',
             'firstname' => 'required|max:255',
             'lastname' => 'required_without:surname|max:255',
-            'bdate' => 'required|date',
-            'mob1'  => 'required|digits:10',
-            'mob2' => 'integer|digits:10',
+            'birthday' => 'required|date',
+            'primary_mobile'  => 'required|digits:10',
+            'secondary_mobile' => 'integer|digits:10',
             'whatsapp' => 'integer|digits:10',
             'fb_email' => 'max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'per_district' => 'required_with:per_pincode',
+            'cur_district' => 'required_with:cur_pincode',
+            'office_district' => 'required_with:office_pincode',
         ]);
     }
 
@@ -77,8 +80,8 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        if(Input::hasFile('image')){
-        $file = Input::file('image');
+        if(Input::hasFile('profile_pic')){
+        $file = Input::file('profile_pic');
         $img = Image::make($file)->resize(160, 160);
         Response::make($img->encode('jpeg'));
         }
@@ -89,20 +92,57 @@ class AuthController extends Controller
             'surname' => $data['surname'],
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
-            'bdate' => $data['bdate'],
-            'mob1' => $data['mob1'],
-            'mob2' => $data['mob2'],
+            'initiated_name'=> $data['initiated_name'],
+            'email' => $data['email'],
+            'birthday' => $data['birthday'],
+            'primary_mobile' => $data['primary_mobile'],
+            'secondary_mobile' => $data['secondary_mobile'],
             'whatsapp' => $data['whatsapp'],
             'fb_email' => $data['fb_email'],
+
             'college_name' => $data['college_name'],
+            'course' => $data['course'],
+            'department' => $data['department'],
             'period_from' => $data['period_from'],
             'period_to' => $data['period_to'],
-            // 'connected_center' => $data['connected_center'],
-            // 'connected_devotee' => $data['connected_devotee'],
+
             'per_addr' => $data['per_addr'],
-            'per_pin_id'=> Pincode::where(['pincode'=>$data['per_pin'],'city/town'=>$data['per_city'],'postoffice'=>$data['per_postoffice']])->first()->id,
-            'image' => $img,
-            'email' => $data['email'],
+            'per_city' => $data['per_city'],
+            'per_pincode' => $data['per_pincode'],
+            'per_district' => $data['per_district'],
+            'per_state' => $data['per_state'],
+            'per_postoffice' => $data['per_postoffice'],
+
+            'current_status' => $data['current_status'],
+            //Studying
+            'staying_at' => $data['staying_at'],
+
+            //if check and fill in current address
+
+            //Working
+            'cur_addr' => $data['cur_addr'],
+            'cur_city' => $data['cur_city'],
+            'cur_pincode' => $data['cur_pincode'],
+            'cur_district' => $data['cur_district'],
+            'cur_state' => $data['cur_state'],
+            'cur_postoffice' => $data['cur_postoffice'],
+
+            'company_name' => $data['company_name'],
+            'company_designation' => $data['company_designation'],
+
+            'office_addr' => $data['office_addr'],
+            'office_city' => $data['office_city'],
+            'office_pincode' => $data['office_pincode'],
+            'office_district' => $data['office_district'],
+            'office_state' => $data['office_state'],
+            'office_postoffice' => $data['office_postoffice'],
+
+
+            //center,devoteees
+            'counsellor' => $data['counsellor'],
+            // '' => $data[''],
+            
+            'profile_pic' => $img,
             'password' => bcrypt($data['password'])
         ]);
     }
