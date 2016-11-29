@@ -34,7 +34,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new authentication controller instance.
@@ -62,7 +62,6 @@ class AuthController extends Controller
             'bdate' => 'required|date',
             'mob1'  => 'required|digits:10',
             'mob2' => 'integer|digits:10',
-            'whatsapp' => 'integer|digits:10',
             'fb_email' => 'max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -85,6 +84,14 @@ class AuthController extends Controller
         else
             $img=null;
 
+        
+           $pin = Pincode::firstOrCreate([
+            'pincode' => $data['per_pin'],
+            'city' => $data['per_city'],
+            'postoffice' => $data['per_postoffice'],
+            'state' => $data['per_state']
+            ]);
+
         return User::create([
             'surname' => $data['surname'],
             'firstname' => $data['firstname'],
@@ -100,7 +107,7 @@ class AuthController extends Controller
             // 'connected_center' => $data['connected_center'],
             // 'connected_devotee' => $data['connected_devotee'],
             'per_addr' => $data['per_addr'],
-            'per_pin_id'=> Pincode::where(['pincode'=>$data['per_pin'],'city/town'=>$data['per_city'],'postoffice'=>$data['per_postoffice']])->first()->id,
+            'per_pin_id'=> $pin['id'],
             'image' => $img,
             'email' => $data['email'],
             'password' => bcrypt($data['password'])

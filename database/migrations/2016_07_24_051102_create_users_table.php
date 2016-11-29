@@ -31,8 +31,8 @@ class CreateUsersTable extends Migration
             $table->integer('connected_devotee')->unsigned()->nullable();
             $table->string('per_addr',200)->nullable();
             $table->integer('per_pin_id')->unsigned()->nullable();
-            $table->string('cur_addr',200);
-            $table->integer('cur_pin_id')->unsigned();
+            $table->string('cur_addr',200)->nullable();
+            $table->integer('cur_pin_id')->unsigned()->nullable();
             $table->binary('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
