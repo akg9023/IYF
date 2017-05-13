@@ -17,7 +17,7 @@ class ImageController extends Controller
     public function showProfilePic($id)
     {
         $user = User::findOrFail($id);
-        $pic = Image::make($user->image?$user->image:asset('\bower_components\AdminLTE\dist\img\avatar.png'));
+        $pic = Image::make($user->profile_pic?$user->profile_pic:asset('\bower_components\AdminLTE\dist\img\avatar.png'));
 
         $response = Response::make($pic->encode('jpeg'));
 
