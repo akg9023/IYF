@@ -173,6 +173,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TwilioCapabilityProvider::class,
 
         /*
         *Yajra Datatables Service Providers...
@@ -228,7 +229,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image'     => Intervention\Image\Facades\Image::class,
-        'Datatables' => Yajra\Datatables\Facades\Datatables::class
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

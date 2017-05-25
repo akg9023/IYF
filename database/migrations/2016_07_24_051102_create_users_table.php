@@ -86,7 +86,7 @@ class CreateUsersTable extends Migration
             // $table->foreign('office_pin_id')->references('id')->on('pincodes');
         });
 
-        User::create(['firstname'=>'Ashish', 'primary_mobile'=>7501180120,'email'=>'akg9023@gmail.com','password'=>bcrypt('agtsp')]);
+        User::create(['firstname'=>'Ashish', 'primary_mobile'=>7501180120,'email'=>'akg9023@gmail.com','password'=>bcrypt('agtsp'), 'is_admin' => true]);
         User::create(['firstname'=>'Mohan', 'primary_mobile'=>7044034040, 'type1'=>'counsellor','email'=>'iyfkolkata108@gmail.com','password'=>bcrypt('agtsp')]);
     }
 

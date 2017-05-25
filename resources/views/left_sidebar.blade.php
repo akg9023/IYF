@@ -31,14 +31,39 @@
     <!-- /.search form -->
 
     <!-- Sidebar Menu -->
-    @if(Auth::guest())
+    <?php $is_guest=Auth::guest() ?>
+
     <ul class="sidebar-menu">
+    @if($is_guest)
+
       <li class="header">Main Navigation</li>
+
+    @else
+
+      <li style="white-space:nowrap;" class="treeview header">
+        <span>Site Navigation</span>
+      </li>
+      <li class="treeview">
+        <a href="#"><span>Expand</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i><i class="fa fa-angle-left pull-right"></i>
+          </span></a> 
+        <ul class="treeview-menu">
+
+    @endif
+
       <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a class="aboutus" href="javascript:void(0)" onclick="load_content('{{asset('/')}}',this.parent)"><i class="glyphicon glyphicon-fire"></i> <span>About Us</span></a></li>
-      <li><a href="#"><i class="fa fa-institution"></i> <span>Our Centers</span></a></li>
-      <li><a href="#"><i class="fa fa-calendar-check-o"></i> <span>Events</span></a></li>
-      <li><a href="#"><i class="fa fa-picture-o"></i> <span>Gallery</span></a></li>
+      <!-- -------Ajax Implementation------- -->
+      <!-- <li class="active"><a class="aboutus" href="javascript:void(0)" onclick="load_content('{{asset('/')}}',this.parent)"><i class="glyphicon glyphicon-fire"></i> <span>About Us</span></a></li> -->
+
+      <li class="active"><a class="aboutus" href="{{asset('/')}}"><i class="glyphicon glyphicon-fire"></i> <span>About Us</span></a></li>
+
+      @if($is_guest)
+      <li><a href="{{asset('/disqus')}}"><i class="fa fa-commenting-o"></i> <span>Disqus</span><span class="label label-success pull-right-container">2</span></a></li>
+      @endif
+      <li><a href="{{asset('/displaycenters')}}"><i class="fa fa-institution"></i> <span>Our Centers</span></a></li>
+      <li><a href="{{asset('/events')}}"><i class="fa fa-calendar-check-o"></i> <span>Events</span></a></li>
+      <li><a href="{{asset('/gall')}}"><i class="fa fa-picture-o"></i> <span>Gallery</span></a></li>
       <!-- <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
           <span class="pull-right-container">
@@ -51,12 +76,22 @@
         </ul>
       </li> -->
       <li><a href="#zbwid-2bf24716"><i class="fa fa-user-secret"></i> <span>Contact Us</span></a></li>
+      @if(!$is_guest)
+        </ul>
+        </li>
+      @endif
     </ul>
-    @else
+    @if(!$is_guest)
     <ul class="sidebar-menu">
-      <li class="header">Main Navigation</li>
+      <li class="header">Tool Navigation</li>
       <!-- Optionally, you can add icons to the links -->
+      @if(Auth::user()->is_admin)
       <li class="active"><a href="{{asset('/home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+      @endif
+      
+      @if(!$is_guest)
+      <li><a href="{{asset('/disqus')}}"><i class="fa fa-commenting-o"></i> <span>Disqus</span><span class="label label-success pull-right-container">2</span></a></li>
+      @endif
       <li class="treeview">
         <a href="#"><i class="fa fa-newspaper-o"></i> <span>Updating Profiles</span>
           <span class="pull-right-container">
@@ -65,11 +100,16 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="{{asset('/user/edit_profile')}}">My Profile</a></li>
+
+          @if(Auth::user()->is_admin)
           <li><a href="{{asset('/admin/edit_database')}}">User Profile</a></li>
+          @endif
+
         </ul>
       </li>
 
-      <li class="treeview">
+<!-- ------------TO BE ADDED LATER------------- -->
+      <!-- <li class="treeview">
         <a href="#"><i class="fa fa-newspaper-o"></i> <span>Connect</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -79,12 +119,31 @@
           <li><a href="{{asset('/user/connect')}}">My Family</a></li>
           <li><a href="{{asset('/user/connect')}}">Spiritual Family</a></li>
         </ul>
-      </li>
-      
-      <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span>Task Manager</span></a></li>
-      <li><a href="#"><i class="glyphicon glyphicon-scale"></i> <span>Permission Level</span></a></li>
+      </li> -->
 
-      <li><a href="#"><i class="glyphicon glyphicon-piggy-bank"></i> <span>EASY</span></a></li>
+      <!-- <li><a href="#"><i class="glyphicon glyphicon-scale"></i> <span>Permission Level</span></a></li> -->
+      
+      <!-- <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span>Task Manager</span></a></li> -->
+
+      @if(!Auth::user()->is_admin)
+      <li><a href="{{asset('/send_emails')}}"><i class="fa fa-heartbeat"></i><span>Email Fun</span></a></li>
+      @endif
+
+
+
+      @if(Auth::user()->is_admin)
+
+      <li class="treeview">
+        <a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span>Forum Manager</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+      <li><a href="{{asset('/admin/displaycenteraftlogin')}} ">Manage Centers</a></li>
+          <li><a href="{{asset('/admin/addevents')}}">Manage Events</a></li>
+        </ul>
+      </li>
 
       <li class="treeview">
         <a href="#"><i class="fa fa-heartbeat"></i> <span>Care System</span>
@@ -93,11 +152,15 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="#">SMS Fun</a></li>
-          <li><a href="#">Email Fun</a></li>
-          <li><a href="#">Calling Fun</a></li>
+          <li><a href="{{asset('/send_sms')}}">SMS Fun</a></li>
+          <li><a href="{{asset('/send_emails')}}">Email Fun</a></li>
+          <li><a href="{{asset('/call_user')}}">Calling Fun</a></li>
         </ul>
       </li>
+      @endif
+
+      <li><a href="#"><i class="glyphicon glyphicon-piggy-bank"></i> <span>EASY</span></a></li>
+      
     </ul>
     @endif
     <!-- /.sidebar-menu -->

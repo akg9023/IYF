@@ -16,7 +16,7 @@
 
                 <div class="panel-body">
                     <div class="col-md-10 col-md-offset-1 inline" style="float:left;">
-                        <img src="{{asset('/bower_components/AdminLTE/dist/img/gaurnitai.jpg')}}" align="middle" style="width:100%;height:100%;">
+                        <img src="{{asset('/bower_components/AdminLTE/dist/img/photo.jpg')}}" align="middle" style="width:100%;height:100%;">
                     </div>
                     <div dir="ltr" style="text-align: left; clear: both;" trbidi="on">
                         <div style="text-align: justify;">

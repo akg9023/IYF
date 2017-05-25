@@ -11,21 +11,27 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/morris/morris.css')}}">
+  <!-- <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/morris/morris.css')}}"> -->
   <!-- Date Picker -->
   <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/datepicker/datepicker3.css')}}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
+  <!-- AdminLTE Skins. -->
+  <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/skins/skin-green.min.css')}}">
+  <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/skins/skin-yellow.min.css')}}">
+  <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/skins/skin-red.min.css')}}">
+  <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/skins/skin-purple.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/iCheck/flat/blue.css')}}">
 
 <!-- Small boxes (Stat box) -->
+
   <div class="row">
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
+          <h3>0</h3>
 
           <p>Donations this month</p>
         </div>
@@ -59,7 +65,7 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
+          <h3>{{App\User::count()}}</h3>
 
           <p>User Registrations</p>
         </div>
@@ -206,23 +212,80 @@
           <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
         </div>
       </div>
-      <div class="box">
-        <!-- Custom tabs (Charts with tabs)-->
-          <div class="nav-tabs-custom">
-            <!-- Tabs within a box -->
-            <ul class="nav nav-tabs pull-right">
-              <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-              <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-              <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-            </ul>
-            <div class="tab-content no-padding">
-              <!-- Morris chart - Sales -->
-              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-            </div>
+        
+        <?php
+          $cd=new DateTime();
+          $new_users=App\User::where('created_at','>=', date_modify($cd,date_format($cd,"\-w \d\a\y\s ")))->orderBy('created_at','desc')->get();
+          
+          function find_equivalent_date($num1)
+          {
+            $curdate = new DateTime();
+            $date = new DateTime($num1);
+            $diff=date_diff($num1,$curdate)->format('%a');
+            if($diff==0)
+              return "Today";
+            elseif($diff==1)
+              return "Yesterday";
+            else
+              return  date_format($num1,"l, jS M");
+          } 
+
+       ?>
+       <!-- quick email widget -->
+      <div class="box box-info">
+        <div class="box-header">
+          <i class="fa fa-envelope"></i>
+
+          <h3 class="box-title">Quick Email</h3>
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
           </div>
-        <!-- /.nav-tabs-custom -->
+          <!-- /. tools -->
+        </div>
+        <div class="box-body">
+          <form id="email_form" action="{{url('/admin/mail_user')}}" method="post" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+            <div class="form-group">
+              <input type="email" class="form-control" name="emailto" placeholder="Email to:">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" placeholder="Subject">
+            </div>
+            <div>
+              <textarea name="message" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="box-footer clearfix">
+        
+          <span class="text-orange" style="float:left; font-size:85%;">*Ignore including greetings and signatures</span>
+    
+          <button type="submit" class="pull-right btn btn-default" id="sendEmail" form="email_form">Send
+            <i class="fa fa-arrow-circle-right"></i></button>
+        </div>
       </div>
+
+<!-- ----------------------------------------------Commented --------------------------------------------------- -->
+      {{--<div class="box">
+                    <!-- Custom tabs (Charts with tabs)-->
+                      <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                          <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
+                          <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                          <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                          <!-- Morris chart - Sales -->
+                          <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
+                          <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+                        </div>
+                      </div>
+                    <!-- /.nav-tabs-custom -->
+                  </div>--}}
+<!-- ---------------------------------------------- /Commented --------------------------------------------------- -->
       <!-- /.box -->
     </section>
     <!-- /.Left col -->
@@ -304,22 +367,87 @@
           <!-- /.row -->
         </div>
       </div>
+
+      <!-- USERS LIST -->
+        <div class="box box-danger">
+          <div class="box-header with-border">
+            <h3 class="box-title">Latest Members</h3>
+
+            <div class="box-tools pull-right">
+              <span class="label label-danger"> {{$new_users->count()}} &nbsp;New Members this Week</span>
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <ul class="users-list clearfix">
+
+
+            @foreach ($new_users as $user)
+              <li>
+                <img src="{{url('/user/'.$user->id.'/profile_pic')}}" alt="User Image">
+                <a class="users-list-name" href="#">{{$user->firstname}}</a>
+                <span class="users-list-date">{{find_equivalent_date($user->created_at)}}</span>
+              </li>
+            @endforeach
+              <!-- <li>
+                <img src="dist/img/user8-128x128.jpg" alt="User Image">
+                <a class="users-list-name" href="#">Norman</a>
+                <span class="users-list-date">Yesterday</span>
+              </li>
+              <li>
+                <img src="dist/img/user7-128x128.jpg" alt="User Image">
+                <a class="users-list-name" href="#">Jane</a>
+                <span class="users-list-date">12 Jan</span>
+              </li>
+              <li>
+                <img src="dist/img/user6-128x128.jpg" alt="User Image">
+                <a class="users-list-name" href="#">John</a>
+                <span class="users-list-date">12 Jan</span>
+              </li>
+              <li>
+                <img src="dist/img/user2-160x160.jpg" alt="User Image">
+                <a class="users-list-name" href="#">Alexander</a>
+                <span class="users-list-date">13 Jan</span>
+              </li>
+              <li>
+                <img src="dist/img/user5-128x128.jpg" alt="User Image">
+                <a class="users-list-name" href="#">Sarah</a>
+                <span class="users-list-date">14 Jan</span>
+              </li>
+              <li>
+                <img src="dist/img/user4-128x128.jpg" alt="User Image">
+                <a class="users-list-name" href="#">Nora</a>
+                <span class="users-list-date">15 Jan</span>
+              </li>
+              <li>
+                <img src="dist/img/user3-128x128.jpg" alt="User Image">
+                <a class="users-list-name" href="#">Nadia</a>
+                <span class="users-list-date">15 Jan</span>
+              </li> -->
+            </ul>
+            <!-- /.users-list -->
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer text-center">
+            <a href="javascript:void(0)" class="uppercase">View All Users</a>
+          </div>
+          <!-- /.box-footer -->
+        </div>
+        <!--/.box -->
     </section>
   </div>
 @endsection
 
 @push('scripts')
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
+
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="{{asset('bower_components/AdminLTE/plugins/morris/morris.min.js')}} "></script>
-<!-- Sparkline -->
-<script src="{{asset('bower_components/AdminLTE/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{{asset('bower_components/AdminLTE/plugins/morris/morris.min.js')}} "></script>--}}
+
 <!-- jvectormap -->
 <script src="{{asset('bower_components/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
 <script src="{{asset('bower_components/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
@@ -334,7 +462,7 @@
 <script src="{{asset('bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('bower_components/AdminLTE/dist/js/pages/dashboard.js')}}"></script>
-<script src="{{asset('bower_components/AdminLTE/dist/js/pages/dashboard2.js')}}"></script>
+<!-- <script src="{{asset('bower_components/AdminLTE/dist/js/pages/dashboard2.js')}}"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('bower_components/AdminLTE/dist/js/demo.js')}}"></script>
 

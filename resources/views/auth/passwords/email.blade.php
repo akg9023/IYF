@@ -1,4 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin_template')
+
+@section('initialize')
+<?php
+    $page_title="Reset Password";
+    $page_desc="get link in your email";
+?>
+@stop
 
 <!-- Main Content -->
 @section('content')

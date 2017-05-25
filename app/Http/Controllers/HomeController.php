@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -24,11 +26,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        if(Auth::user()->is_admin)
+            return view('dashboard');
+        
+        return back()->with('error','Unauthorized Request!')->withInput();
     }
 
     public function edit()
     {
         return view('edit');
+    }
+
+    public function care_mail()
+    {
+        return view('care.mail');
+    }
+    
+    public function care_call()
+    {
+        return view('care.mail');
     }
 }

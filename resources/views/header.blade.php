@@ -28,7 +28,7 @@
           <!-- Menu toggle button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope-o"></i>
-            <span class="label label-success">4</span>
+            <span class="label label-success float-right">4</span>
           </a>
           <ul class="dropdown-menu">
             <li class="header">You have 4 messages</li>
@@ -134,8 +134,9 @@
               <img src="{{url('/user/'.Auth::user()->id.'/profile_pic')}}" class="img-circle" alt="User Image">
 
               <p>
-                {{$name}} - Web Developer
-                <small>Member since Nov. 2012</small>
+                {{$name}} - {{\App\User::is_Admin()? 'Administrator':'User'}}
+                <!-- str_limit(Auth::user()->created_at, $limit =10, $end = '...') -->
+                <small>Member since {{date_format(Auth::user()->created_at,"M-Y")}}</small>
               </p>
             </li>
             <!-- Menu Body -->
