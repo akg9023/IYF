@@ -11,7 +11,7 @@ class CreateUsersTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+       */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('initiated_name');
             $table->date('birthday')->nulable();
-            $table->date('anniversary')->nullable();
+             $table->date('anniversary')->nullable();
             $table->bigInteger('primary_mobile')->unique();
             $table->bigInteger('secondary_mobile')->nullable();
             $table->string('email')->unique();
@@ -86,7 +86,9 @@ class CreateUsersTable extends Migration
             // $table->foreign('office_pin_id')->references('id')->on('pincodes');
         });
 
+
         User::create(['firstname'=>'Ashish', 'primary_mobile'=>7501180120,'email'=>'akg9023@gmail.com','password'=>bcrypt('agtsp'), 'is_admin' => true]);
+
         User::create(['firstname'=>'Mohan', 'primary_mobile'=>7044034040, 'type1'=>'counsellor','email'=>'iyfkolkata108@gmail.com','password'=>bcrypt('agtsp')]);
     }
 

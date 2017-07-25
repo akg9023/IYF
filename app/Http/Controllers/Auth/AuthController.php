@@ -60,11 +60,13 @@ class AuthController extends Controller
             'lastname' => 'required_without:surname|max:255',
             'birthday' => 'required|date',
             'primary_mobile'  => 'required|digits:10',
+
             'secondary_mobile' => 'digits:10',
             'whatsapp' => 'digits:10',
             'fb_email' => 'max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:5|confirmed',
+
             'per_district' => 'required_with:per_pincode',
             'cur_district' => 'required_with:cur_pincode',
             'office_district' => 'required_with:office_pincode',
@@ -110,7 +112,9 @@ class AuthController extends Controller
             'per_pincode' => $data['per_pincode'],
             'per_district' => $data['per_district'],
             'per_state' => $data['per_state'],
+
             'per_postoffice' => array_has($data,'per_postoffice')? $data['per_postoffice']:null,
+
 
             'current_status' => $data['current_status'],
             //Studying
@@ -124,7 +128,9 @@ class AuthController extends Controller
             'cur_pincode' => $data['cur_pincode'],
             'cur_district' => $data['cur_district'],
             'cur_state' => $data['cur_state'],
+
             'cur_postoffice' => array_has($data,'cur_postoffice')? $data['cur_postoffice']:null,
+
 
             'company_name' => $data['company_name'],
             'company_designation' => $data['company_designation'],
@@ -134,7 +140,9 @@ class AuthController extends Controller
             'office_pincode' => $data['office_pincode'],
             'office_district' => $data['office_district'],
             'office_state' => $data['office_state'],
+
             'office_postoffice' => array_has($data,'office_postoffice')?$data['office_postoffice']:null,
+
 
 
             //center,devoteees

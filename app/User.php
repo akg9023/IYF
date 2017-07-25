@@ -25,6 +25,7 @@ class User extends Authenticatable
 
     public static function get_counsellors(){
 
+
         // return User::where('type1','counsellor')
         //             ->orderBy('initiated_name','asc')
         //             ->select('id','initiated_name as name')->get();
@@ -37,5 +38,6 @@ class User extends Authenticatable
 
         return \Auth::user()->is_admin;
     }    
+
     
 }

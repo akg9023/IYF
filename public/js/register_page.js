@@ -13,15 +13,18 @@
 
 
 //Also add center when a inmate devotee chooses a voice.
+
 function select_option(s,val)
 {
     $('select#'+s+' option').removeAttr("selected");
     $('select#'+s+' option[value=\"'+val+'\"]').attr('selected','selected');
 }
 
+
 $(function() {
 
 //for pincodes
+
 // function select_option(s,val)
 // {
 //     $(s +'option[value='+val+']').attr('selected','selected');
@@ -76,6 +79,7 @@ $("input[id*='_pincode']").blur(function( event ) {
     //see regular Expressions in js for more understanding...
     var prefix = /(per_|cur_|mess_|office_|c_)/.exec(this.id);  //prefix[0]
 
+
     var postoff = document.getElementById(prefix[0]+"postoffice");
     var dist = document.getElementById(prefix[0]+"district");
     var state = document.getElementById(prefix[0]+"state");
@@ -85,11 +89,13 @@ $("input[id*='_pincode']").blur(function( event ) {
 
         // event.preventDefault();
 
+
         var post_value=$(postoff).val(); //used later (see below inside if)
         $(postoff).empty();
         $(dist).val(null);
         $(state).val(null);
         $(postoff).append('<option value=" " disabled hidden selected>Select Post Office</option>');
+
         $(postoff).focus();
 
         $.getJSON('https://data.gov.in/api/datastore/resource.json?resource_id=0a076478-3fd3-4e2c-b2d2-581876f56d77&api-key=1313a67fc68c64c9b449ae7771d5f4cb&filters[pincode]='+$( pin ).val(),
@@ -124,7 +130,9 @@ $("input[id*='_pincode']").blur(function( event ) {
         $(postoff).empty();
         $(dist).val(null);
         $(state).val(null);
+
         $(postoff).append('<option value=" " disabled hidden selected>Select Post Office</option>');
+
     }
 });
 
