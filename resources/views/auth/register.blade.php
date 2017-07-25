@@ -341,8 +341,10 @@
                                         </div>
                                         
                                         <div class="col-md-3">
-                                             <select id="per_postoffice" type="text" class="form-control" name="per_postoffice" value="{{ old('per_postoffice') }}" placeholder="Post Office" style="color: #999;">
-                                                 <option value="" disabled hidden selected>Select Post Office</option>
+
+                                             <select id="per_postoffice" type="text" class="form-control" name="per_postoffice" onfocus="select_option(this.id,&apos;{{ old('per_postoffice') }}&apos;)" placeholder="Post Office" style="color: #999;">
+                                                 <option value=" " disabled hidden selected>Select Post Office</option>
+
                                              </select>
                                         </div>
 
@@ -495,8 +497,10 @@
                                                     </div>
                                                     
                                                     <div class="col-md-3">
-                                                         <select id="mess_postoffice" type="text" class="form-control" name="mess_postoffice" value="{{ old('mess_postoffice') }}" placeholder="Post Office" style="color: #999;">      
-                                                        <option value="" disabled hidden selected>Select Post Office</option>
+
+                                                         <select id="mess_postoffice" type="text" class="form-control" name="mess_postoffice" onfocus="select_option(this.id,&apos;{{ old('mess_postoffice') }}&apos;)" placeholder="Post Office" style="color: #999;">      
+                                                        <option value=" " disabled hidden selected>Select Post Office</option>
+
                                                          </select>
                                                     </div>
 
@@ -549,7 +553,9 @@
                                             <div class="form-group{{ $errors->has('voice') ? ' has-error' : '' }}">
                                                 <label for="voice" class="col-md-4 control-label">Voice Name</label>
                                                 <div class="col-md-6">
-                                                    <select class="form-control" id="voice" name="voice" value="{{old('voice')}}">
+
+                                                    <select class="form-control" id="voice" name="voice" onfocus="select_option(this.id,&apos;{{old('voice')}}&apos;)">
+
                                                         <option>Rameswaram Voice</option>
                                                         <option>Puri Voice</option>
                                                         <option>Haridwar Voice</option>
@@ -605,8 +611,10 @@
                                             </div>
                                             
                                             <div class="col-md-3">
-                                                 <select id="cur_postoffice" type="text" class="form-control" name="cur_postoffice" value="{{ old('cur_postoffice') }}" placeholder="Post Office" style="color: #999;">
-                                                    <option value="" disabled hidden selected>Select Post Office</option>
+
+                                                 <select id="cur_postoffice" type="text" class="form-control" name="cur_postoffice" onfocus="select_option(this.id,&apos;{{ old('cur_postoffice') }}&apos;)" placeholder="Post Office" style="color: #999;">
+                                                    <option value=" " disabled hidden selected>Select Post Office</option>
+
                                                 </select>
                                             </div>
 
@@ -710,8 +718,10 @@
                                             </div>
                                             
                                             <div class="col-md-3">
-                                                 <select id="office_postoffice" type="text" class="form-control" name="office_postoffice" value="{{ old('office_postoffice') }}" placeholder="Post Office" style="color: #999;">
-                                                     <option value="" disabled hidden selected>Select Post Office</option>
+
+                                                 <select id="office_postoffice" type="text" class="form-control" name="office_postoffice" onfocus="select_option(this.id,&apos;{{ old('office_postoffice') }}&apos;)" placeholder="Post Office" style="color: #999;">
+                                                     <option value=" " disabled hidden selected>Select Post Office</option>
+
                                                  </select>
                                             </div>
                                             <div class="col-md-10">
@@ -843,10 +853,13 @@
                                     <label for="counsellor" class="col-md-4 control-label">Counsellor Name</label>
 
                                     <div class="col-md-6">
-                                        <select id="counsellor" type="text" class="form-control" name="counsellor" value="{{ old('counsellor') }}">
+
+                                        <select id="counsellor" type="text" class="form-control" name="counsellor" onfocus="select_option(this.id,&apos;{{ old('counsellor') }}&apos;)">
                                             <?php   $counsellors = \App\User::get_counsellors(); ?>
                                             @foreach($counsellors as $counsellor)
-                                                <option value={{$counsellor->id}}>HG {{$counsellor->name}} Pr. ji</option>
+                                                <!-- <option value={{$counsellor->id}}>HG {{$counsellor->name}} Pr. ji</option> -->
+                                                <option value="{{$counsellor->id}}">{{$counsellor->full_name}}</option> 
+
                                             @endforeach
 
                                         </select>

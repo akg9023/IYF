@@ -16,7 +16,15 @@
         "maatwebsite/excel": "~2.1.0",
         "intervention/image": "dev-master",
         "yajra/laravel-datatables-oracle": "~6.0",
-        "doctrine/dbal": "^2.5"
+
+        "doctrine/dbal": "^2.5",
+
+        "dompdf/dompdf": "~0.6.1",
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "phpoffice/phpexcel": "^1.8",
+        "twilio/sdk": "^5.8"
+
+
 
     },
     "require-dev": {

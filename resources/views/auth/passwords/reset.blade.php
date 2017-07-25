@@ -1,4 +1,12 @@
-@extends('layouts.app')
+
+@extends('layouts.admin_template')
+
+@section('initialize')
+<?php
+    $page_title="Reset Password";
+    $page_desc="Enter new password";
+?>
+@stop
 
 @section('content')
 <div class="container">

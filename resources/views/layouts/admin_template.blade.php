@@ -29,8 +29,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   -->
   <link rel="stylesheet" href="{{asset('/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css')}}" >
   
-  
-  
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{{asset('/bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
   
   
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -60,7 +60,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini wysihtml5-supported">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -74,6 +74,17 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    
     <section class="content-header">
       <h1>
         {{$page_title}}
@@ -115,16 +126,27 @@ desired effect
 <!-- <script src="{{asset('/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> -->
 <script type="text/javascript" src="//code.jquery.com/jquery.js"></script>
 
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+
 <!-- Bootstrap 3.3.6 -->
 <!-- <script src="{{asset('/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js')}}"></script> -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('/bower_components/AdminLTE/dist/js/app.min.js')}}"></script>
-
-<!-- Slimscroll -->
-<script src="{{asset('bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{asset('/bower_components/AdminLTE/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 <!-- FastClick -->
-<script src="{{asset('bower_components/AdminLTE/plugins/fastclick/fastclick.js')}}"></script>
+<script src="{{asset('/bower_components/AdminLTE/plugins/fastclick/fastclick.js')}}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{asset('/bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+<!-- Slimscroll -->
+<script src="{{asset('/bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
+
 
 <!-- <script type="text/javascript" src="{{asset('/bower_components/jquery/dist/jquery.min.js')}}"></script> -->
 
@@ -139,6 +161,7 @@ desired effect
 //Contact form from Zotabox
 (function(d,s,id){var z=d.createElement(s);z.type="text/javascript";z.id=id;z.async=true;z.src="//static.zotabox.com/c/c/cc7a1f16a0c3aab78ebc32f1bb2b992b/widgets.js";var sz=d.getElementsByTagName(s)[0];sz.parentNode.insertBefore(z,sz)}(document,"script","zb-embed-code"));
 
+
 // Handling Ajax request for loading cotents on particular menu clicked
 function load_content(url,domObj){
 
@@ -149,6 +172,6 @@ function load_content(url,domObj){
 }
 
 </script>
-
+@stack('disqus')
 </body>
 </html>
